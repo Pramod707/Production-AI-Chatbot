@@ -1,6 +1,6 @@
-from dotenv import loadenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_ollama import ChatOllama
 
-loadenv()
-
-llm = ChatGoogleGenerativeAI(model="google:genai_2.5-flash", temperature=0.2)
+llm = ChatOllama(model="qwen2.5:7b")
+stream = llm.stream("what is docker")
+for chunk in stream:
+    print(chunk.content, flush=True, end="")
